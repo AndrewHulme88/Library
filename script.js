@@ -1,4 +1,8 @@
 const myLibrary = [];
+const modal = document.getElementById("book-modal");
+const addButton = document.getElementById("add-book-button");
+const closeButton = document.getElementById("close-button");
+const submitButton = document.getElementById("submit-button");
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -36,7 +40,15 @@ function displayLibrary() {
   });
 }
 
-document.getElementById("bookForm").addEventListener("submit", (event) => {
+addButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+closeButton.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+submitButton.addEventListener("click", (event) => {
   event.preventDefault();
 
   const title = document.getElementById("title").value;
@@ -45,7 +57,8 @@ document.getElementById("bookForm").addEventListener("submit", (event) => {
   const read = document.getElementById("read").checked;
 
   const newBook = new Book(title, author, pages, read);
-  addBookToLibrary();
+  addBookToLibrary(newBook);
 
-  document.getElementById("bookForm").reset();
+  document.getElementById("book-form").reset();
+  modal.style.display = "none";
 });
